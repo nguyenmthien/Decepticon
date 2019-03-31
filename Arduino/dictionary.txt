@@ -1,0 +1,17 @@
+AnalogL  000...359, except for 999 is break
+AnalogR  no mapping
+
+A        998      Emergency stop
+B        997      
+X        996
+Y        995
+
+UP       994      Both up
+DOWN     993      Both down
+LEFT     992      Left up right down
+RIGHT    991      Right up left down
+
+LB       990      Speed up 
+LT       989      
+RB       988      Speed down
+RT       987
