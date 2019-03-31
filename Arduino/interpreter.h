@@ -80,7 +80,7 @@ void interprete()
       if ((input < 360) && (input > -360))
       {   
 			  theta = input * 0.0174532925199432958; // to radians
-			  debug = true;
+			  debug = false;
 			  break;
       }
    }
