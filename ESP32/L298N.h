@@ -32,8 +32,8 @@ void L298NSetup()
    digitalWrite(leftMotorIN2, LOW);
    digitalWrite(rightMotorIN1, LOW);
    digitalWrite(rightMotorIN2, LOW);
-   ledcWrite(leftMotorPWM, 0);
-   ledcWrite(rightMotorPWM, 0);
+   ledcWrite(leftPWMPinChannel, 0);
+   ledcWrite(rightPWMPinChannel, 0);
 }  
 
 void L298NMotorDriver()
@@ -44,7 +44,7 @@ void L298NMotorDriver()
         leftMotorIN2Bool = 1;
         digitalWrite(leftMotorIN1, leftMotorIN1Bool);
         digitalWrite(leftMotorIN2, leftMotorIN2Bool);
-        ledcWrite(leftMotorPWM, -Ul);
+        ledcWrite(leftPWMPinChannel, -Ul);
     }
     
     if (Ul > 0)
@@ -53,7 +53,7 @@ void L298NMotorDriver()
         leftMotorIN2Bool = 0;
         digitalWrite(leftMotorIN1, leftMotorIN1Bool);
         digitalWrite(leftMotorIN2, leftMotorIN2Bool);
-        ledcWrite(leftMotorPWM, Ul);
+        ledcWrite(leftPWMPinChannel, Ul);
     }
     
     if (Ul == 0)
@@ -62,7 +62,7 @@ void L298NMotorDriver()
         leftMotorIN2Bool = 0;
         digitalWrite(leftMotorIN1, leftMotorIN1Bool);
         digitalWrite(leftMotorIN2, leftMotorIN2Bool);
-        ledcWrite(leftMotorPWM, 0);
+        ledcWrite(leftPWMPinChannel, 0);
     }
     
     if (Ur < 0)
@@ -71,7 +71,7 @@ void L298NMotorDriver()
         rightMotorIN2Bool = 1;
         digitalWrite(rightMotorIN1, rightMotorIN1Bool);
         digitalWrite(rightMotorIN2, rightMotorIN2Bool);
-        ledcWrite(rightMotorPWM, -Ur);
+        ledcWrite(rightPWMPinChannel, -Ur);
     }
     
     if (Ur > 0)
@@ -80,7 +80,7 @@ void L298NMotorDriver()
         rightMotorIN2Bool = 0;
         digitalWrite(rightMotorIN1, rightMotorIN1Bool);
         digitalWrite(rightMotorIN2, rightMotorIN2Bool);
-        ledcWrite(rightMotorPWM, Ur);
+        ledcWrite(rightPWMPinChannel, Ur);
     }
     
     if (Ur == 0)
@@ -89,6 +89,6 @@ void L298NMotorDriver()
         rightMotorIN2Bool = 0;
         digitalWrite(rightMotorIN1, rightMotorIN1Bool);
         digitalWrite(rightMotorIN2, rightMotorIN2Bool);
-        ledcWrite(rightMotorPWM, 0);
+        ledcWrite(rightPWMPinChannel, 0);
     }
 }

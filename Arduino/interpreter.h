@@ -8,7 +8,7 @@
 *		bool debug
  */
  
-void interprete() 
+void interprete(int input, WiFiClient client) 
 {
  
     switch (input)

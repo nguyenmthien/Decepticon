@@ -1,31 +1,41 @@
 /* 
 Pins for Motor 1 Left
-#define leftMotorIN1 13 //IN1 
-#define leftMotorIN2 12 //IN2 
-#define leftMotorPWM 11 //ENA 
+#define leftMotorIN1 15 //IN1 
+#define leftMotorIN2 2 //IN2 
+#define leftPWMPin 4 //ENA 
 
 Pins for Motor 2 Right
-#define rightMotorIN1 10 //IN3 
-#define rightMotorIN2  8 //IN4 
-#define rightMotorPWM 9 //ENB 
+#define rightMotorIN1 16 //IN3 
+#define rightMotorIN2  17 //IN4 
+#define rightPWMPin 5 //ENB 
  */
+const int leftPWMPin = 4;
+const int rightPWMPin = 5;
 
+const int freq = 5000;
+const int leftPWMPinChannel = 0;
+const int rightPWMPinChannel = 1;
+const int resolution = 8;
+ 
 void L298NSetup()
 {
    pinMode(leftMotorIN1, OUTPUT);
    pinMode(leftMotorIN2, OUTPUT);
    pinMode(rightMotorIN1, OUTPUT);
    pinMode(rightMotorIN2, OUTPUT);
-   pinMode(leftMotorPWM, OUTPUT);
-   pinMode(rightMotorPWM, OUTPUT);
    
+   ledcSetup(leftPWMPinChannel, freq, resolution);
+   ledcSetup(rightPWMPinChannel, freq, resolution);
    
+   ledcAttachPin(leftPWMPin, leftPWMPinChannel);
+   ledcAttachPin(rightPWMPin, rightPWMPinChannel);
+
    digitalWrite(leftMotorIN1, LOW);
    digitalWrite(leftMotorIN2, LOW);
    digitalWrite(rightMotorIN1, LOW);
    digitalWrite(rightMotorIN2, LOW);
-   analogWrite(leftMotorPWM, 0);
-   analogWrite(rightMotorPWM, 0);
+   ledcWrite(leftMotorPWM, 0);
+   ledcWrite(rightMotorPWM, 0);
 }  
 
 void L298NMotorDriver()
@@ -36,7 +46,7 @@ void L298NMotorDriver()
         leftMotorIN2Bool = 1;
         digitalWrite(leftMotorIN1, leftMotorIN1Bool);
         digitalWrite(leftMotorIN2, leftMotorIN2Bool);
-        analogWrite(leftMotorPWM, -Ul);
+        ledcWrite(leftMotorPWM, -Ul);
     }
     
     if (Ul > 0)
@@ -45,7 +55,7 @@ void L298NMotorDriver()
         leftMotorIN2Bool = 0;
         digitalWrite(leftMotorIN1, leftMotorIN1Bool);
         digitalWrite(leftMotorIN2, leftMotorIN2Bool);
-        analogWrite(leftMotorPWM, Ul);
+        ledcWrite(leftMotorPWM, Ul);
     }
     
     if (Ul == 0)
@@ -54,7 +64,7 @@ void L298NMotorDriver()
         leftMotorIN2Bool = 0;
         digitalWrite(leftMotorIN1, leftMotorIN1Bool);
         digitalWrite(leftMotorIN2, leftMotorIN2Bool);
-        analogWrite(leftMotorPWM, 0);
+        ledcWrite(leftMotorPWM, 0);
     }
     
     if (Ur < 0)
@@ -63,7 +73,7 @@ void L298NMotorDriver()
         rightMotorIN2Bool = 1;
         digitalWrite(rightMotorIN1, rightMotorIN1Bool);
         digitalWrite(rightMotorIN2, rightMotorIN2Bool);
-        analogWrite(rightMotorPWM, -Ur);
+        ledcWrite(rightMotorPWM, -Ur);
     }
     
     if (Ur > 0)
@@ -72,7 +82,7 @@ void L298NMotorDriver()
         rightMotorIN2Bool = 0;
         digitalWrite(rightMotorIN1, rightMotorIN1Bool);
         digitalWrite(rightMotorIN2, rightMotorIN2Bool);
-        analogWrite(rightMotorPWM, Ur);
+        ledcWrite(rightMotorPWM, Ur);
     }
     
     if (Ur == 0)
@@ -81,6 +91,6 @@ void L298NMotorDriver()
         rightMotorIN2Bool = 0;
         digitalWrite(rightMotorIN1, rightMotorIN1Bool);
         digitalWrite(rightMotorIN2, rightMotorIN2Bool);
-        analogWrite(rightMotorPWM, 0);
+        ledcWrite(rightMotorPWM, 0);
     }
 }
