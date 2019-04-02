@@ -2,7 +2,7 @@
 Created 20190319
 Last edited 20190320
 */
-#include <WiFi.h>
+
 
 //DEFINE PINS
 int leftMotorIN1 = 13, leftMotorIN2 = 12,
@@ -35,6 +35,7 @@ double Kp = 10.0, Ki = 0.0, Kd = 0.0;
 
 
 //IMPORT MODULES
+#include "arduino_esp.h"
 #include "interrupt.h"
 #include "pid.h"
 #include "dictionary.h"
