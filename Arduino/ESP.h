@@ -1,7 +1,11 @@
-void SocketServer(){ 
+/* ArduinoESP module
+Interfacing ESP with Arduino
 
-  WiFiClient client = wifiServer.available();
+REQUIREMENTS
+    SoftwareSerial.h
+ */    
 
+<<<<<<< HEAD:Arduino/ESP.h
   if (client) {
  
     while (client.connected()) {   // while the client is still connected do:
@@ -21,4 +25,13 @@ void SocketServer(){
       delay(0.01);
     }
   }
+=======
+//#include "SoftwareSerial.h"
+//SoftwareSerial ESPserial(0, 1); // RX | TX
+
+void arduinoESPSetup()
+{
+    Serial.begin(115200);
+	  //ESPserial.begin(9600);
+>>>>>>> 629f22185dfd82fe905ec42d02f7f8de8d9b9665:Arduino/arduino_esp.h
 }

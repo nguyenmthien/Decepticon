@@ -2,9 +2,13 @@
 Created 20190319
 Last edited 20190320
 */
+<<<<<<< HEAD
 #include <WiFi.h>
 #include <esp_wifi.h>
 WiFiServer wifiServer(23); // communication port
+=======
+
+>>>>>>> 629f22185dfd82fe905ec42d02f7f8de8d9b9665
 
 // Wifi id and password
   const char* ssid = "nguyenmthien";
@@ -47,6 +51,7 @@ double Kp = 10.0, Ki = 0.0, Kd = 0.0;
 
 
 //IMPORT MODULES
+#include "arduino_esp.h"
 #include "interrupt.h"
 #include "pid.h"
 #include "dictionary.h"
