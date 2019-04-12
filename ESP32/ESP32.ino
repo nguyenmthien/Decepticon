@@ -10,8 +10,10 @@ const char* password = "299792458";
 IPAddress ip(192, 168, 137, 128); 
 IPAddress subnet(255, 255, 255, 0);
 IPAddress gw(192, 168, 1, 1);
-/* create a server and listen on port 8088 */
+/* create a server and listen on port 23 */
 WiFiServer server(23);
+WiFiClient client;
+
 
 
   
@@ -61,6 +63,7 @@ void setup()
   /* connecting to WiFi */
   WiFi.config(ip, gw, subnet);
   WiFi.begin(ssid, password);
+  btStop();
   /*wait until ESP32 connect to WiFi*/
   while (WiFi.status() != WL_CONNECTED) 
   {
@@ -81,10 +84,10 @@ void setup()
 
 void loop()
 {
-    WiFiClient client = server.available(); 
+    client = server.available(); 
     if (client) 
     {                   
-      Serial.println("new client");         
+      client.println("Welcome");         
       /* check client is connected */           
       while (client.connected()) 
       {          
@@ -95,8 +98,6 @@ void loop()
               {
                 client.read();
               }
-              Serial.print("client sent: ");            
-              Serial.println(input);
               interprete(); 
           }
               if (!debug)

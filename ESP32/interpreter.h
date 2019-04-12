@@ -17,7 +17,7 @@ void interprete()
 		{
 			emergencyStop();
 			debug = true;
-			Serial.println("emergencyStop");
+			client.println("emergencyStop");
       resetPID();
 			break;
 		}
@@ -25,7 +25,7 @@ void interprete()
 		{
 			bothUp();
 			debug = true;
-			Serial.println("bothUp");
+			client.println("bothUp");
       resetPID();
 			break;
 		}
@@ -33,7 +33,7 @@ void interprete()
 		{
 			bothDown();
 			debug = true;
-			Serial.println("bothDown");
+			client.println("bothDown");
       resetPID();
 			break;
 		}
@@ -41,7 +41,7 @@ void interprete()
 		{
 			leftUpRightDown();
 			debug = true;
-			Serial.println("leftUpRightDown");
+			client.println("leftUpRightDown");
       resetPID();
 			break;
 		}
@@ -49,7 +49,7 @@ void interprete()
 		{
 			leftDownRightUp();
 			debug = true;
-			Serial.println("leftDownRightUp");
+			client.println("leftDownRightUp");
       resetPID();
 			break;
 		}
@@ -57,7 +57,7 @@ void interprete()
 		{
 			speedUp();
 			debug = false;
-			Serial.println("speedUp");
+			client.println("speedUp");
       resetPID();
 			break;
 		}
@@ -65,7 +65,7 @@ void interprete()
 		{
 			speedDown();
 			debug = false;
-			Serial.println("speedDown");
+			client.println("speedDown");
       resetPID();
 			break;
 		}
