@@ -17,8 +17,8 @@
 *OUTPUTS: countLeft(): leftCount counts number of pulse by left encoder
 *         countRight(): rightCount counts number of pulse by right encoder
 *
-*PINOUT: Left Motor encoder  -> pin 13
-*        Right Motor encoder -> pin 14
+*PINOUT: Left Motor encoder  -> pin 2
+*        Right Motor encoder -> pin 3
 */
  
 
@@ -55,9 +55,9 @@ void countRight()
 
 void interruptSetup()
 {
-    pinMode(13, INPUT);
-	  pinMode(14, INPUT);
+    pinMode(2, INPUT);
+	pinMode(3, INPUT);
     
-    attachInterrupt(digitalPinToInterrupt(13), countLeft, RISING);
-    attachInterrupt(digitalPinToInterrupt(14), countRight, RISING);
+    attachInterrupt(digitalPinToInterrupt(2), countLeft, RISING);
+    attachInterrupt(digitalPinToInterrupt(3), countRight, RISING);
 } 
