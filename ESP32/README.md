@@ -14,6 +14,7 @@ To motor driver:
 * rightMotorIN2: 17
 * leftMotorPWM: 4
 * rightMotorPWM: 5 
+
 To encoders:
 * leftEncoder: 2
 * rightEncoder: 3
