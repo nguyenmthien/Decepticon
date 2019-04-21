@@ -1,1 +1,1 @@
-# Client for AutoBot
+# Processing client for AutoBot
