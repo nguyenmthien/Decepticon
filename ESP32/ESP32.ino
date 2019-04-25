@@ -42,9 +42,9 @@ bool leftMotorIN1Bool = 0, leftMotorIN2Bool = 0,
      rightMotorIN1Bool = 0, rightMotorIN2Bool = 0;
 
 //ERROR FUNCTION & PID VARIABLES
-double k1[3] = {75, 100, 150};
-double k2[3] = {75, 100, 150};
-double Kp = 10.0, Ki = 0.0, Kd = 0.0;
+double k1[3] = {50, 100, 150};
+double k2[3] = {50, 100, 150};
+double Kp = 20.0, Ki = 0.0, Kd = 0.0;
 
 
 //IMPORT MODULES

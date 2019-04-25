@@ -29,8 +29,8 @@ void PID()
     
     
     //Processed values:
-    PVl = omegal * 2000000.0;
-    PVr = omegar * 2000000.0 ;
+    PVl = omegal * 20000.0;
+    PVr = omegar * 20000.0 ;
 
     if ((PVl < 1.0) && (PVl > -1.0))
     {
