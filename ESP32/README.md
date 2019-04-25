@@ -1,11 +1,20 @@
-# Arduino codes
+# ESP32 codes
+Control ESP32 via Wi-Fi with TCP/IP socket.
 
-## FOR REFFERENCE ONLY
+## REQUIREMENTS:
+* ESP32 (of course)
+* Two motors with encoder
+* L298N as motor driver
 
-This folder is in archive
+## PINOUT
+To motor driver:
+* leftMotorIN1: 15
+* leftMotorIN2: 2
+* rightMotorIN1: 16
+* rightMotorIN2: 17
+* leftMotorPWM: 4
+* rightMotorPWM: 5 
 
-All changes are made before 26 March 2019
-
-Everything should work
-
-Last tested on 26 March 2019
+To encoders:
+* leftEncoder: 2
+* rightEncoder: 3
