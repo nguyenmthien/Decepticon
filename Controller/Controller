@@ -1,0 +1,5 @@
+controller
+x	x value	3	SLIDER	X Axis	0	1.0	0.0
+y	y value	3	SLIDER	Y Axis	0	1.0	0.0
+rb	trigger 1	1	BUTTON	Button 5	0	0.0	0.0
+rt	trigger 2	1	BUTTON	Button 4	0	0.0	0.0
