@@ -1,13 +1,13 @@
 /* 
 Pins for Motor 1 Left
-#define leftMotorIN1 15 //IN1 
-#define leftMotorIN2 2 //IN2 
-#define leftPWMPin 4 //ENA 
+#define leftMotorIN1 15 - D15 //IN1 
+#define leftMotorIN2 2 - D2 //IN2 
+#define leftPWMPin 4- D4 //ENA 
 
 Pins for Motor 2 Right
-#define rightMotorIN1 16 //IN3 
-#define rightMotorIN2  17 //IN4 
-#define rightPWMPin 5 //ENB 
+#define rightMotorIN1 16 - RX2 //IN3 
+#define rightMotorIN2  17 - TX2 //IN4 
+#define rightPWMPin 5 - D5 //ENB 
  */
 
 const int freq = 5000;
