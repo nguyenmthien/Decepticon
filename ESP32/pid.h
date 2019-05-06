@@ -59,7 +59,7 @@ void PID()
     Er = SPr - PVr;
 
     
-    Serial.print(SPr); Serial.print(" "); Serial.println(PVr);
+    //Serial.print(SPr); Serial.print(" "); Serial.println(PVr);
     
     
     //PID formulas:

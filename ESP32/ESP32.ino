@@ -57,9 +57,9 @@ double Kp = 20.0, Ki = 0.0, Kd = 0.0;
 
 void setup()
 {
-  Serial.begin(9600);
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
+  //Serial.begin(9600);
+  //Serial.print("Connecting to ");
+  //Serial.println(ssid);
   /* connecting to WiFi */
   WiFi.config(ip, gw, subnet);
   WiFi.begin(ssid, password);
@@ -68,11 +68,11 @@ void setup()
   while (WiFi.status() != WL_CONNECTED) 
   {
       delay(500);
-      Serial.print(".");
+      //Serial.print(".");
   }
-  Serial.println("");
-  Serial.println("WiFi connected with IP address: ");
-  Serial.println(WiFi.localIP());
+  //Serial.println("");
+  //Serial.println("WiFi connected with IP address: ");
+  //Serial.println(WiFi.localIP());
   /* start Server */
   server.begin();
     
@@ -107,5 +107,7 @@ void loop()
     
               L298NMotorDriver();
       }
-    } 
+      emergencyStop();
+      L298NMotorDriver();
+    }
 }
