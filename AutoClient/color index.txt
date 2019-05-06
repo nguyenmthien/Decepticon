@@ -1,0 +1,26 @@
+												Plane
+0	orange-orange	 object_1 	Hình h?p		5	80x80x80		80 x 80
+1	red-red	 	 object_2 	Hình h?p		5		
+2	green-green 	 object_3 	Hình h?p		5		
+3	blue-blue	 object_4 	Hình h?p		5		
+4	yellow-yellow	 object_5 	Hình h?p		5		
+5	purple-purple	 object_6 	Hình h?p		5		
+6	pink-pink	 object_7 	Hình h?p		5		
+7	orange-red	 object_8 	Hình d?t		10	40 x 80 x 140		80 x 140
+8	orange-green	 object_9 	Hình d?t		10		
+9	orange-blue	 object_10 	Hình d?t		10		
+10	orange-yellow	 object_11 	Hình d?t		10		
+11	orange-purple	 object_12 	Hình dia		15	30 x 150 x 150		circle D = 150
+12	orange-pink	 object_13 	Hình dia		15		
+13	red-green	 object_14 	Hình dia		15		
+14	red-blue	 object_15 	Hình máy bay gi?y	20	55 x 150 x 200		150 x 200
+15	red-yellow	 object_16 	Hình máy bay gi?y	20		
+16	red-purple	 object_17 	Hình cái bàn		25	55 x 200 x 100		200 x 100
+17	red-pink	 object_18 	Hình cái bàn		25		
+18	green-blue	 manual_1	Xe Manual d?i 1	-		
+19	green-yellow	 manual_2	Xe Manual d?i 2	-		
+20	green-purple	 auto_1		Xe Auto d?i 1	-		
+21	green-pink	 auto_2		Xe Auto d?i 1	-		
+22	blue-yellow	 object_19 	Hình phi tiêu		30	20 x 128 x 128		128 x 128
+23	blue-purple	 object_20 	Hình phi tiêu		30		
+24	blue-pink	 object_21 	Bom			-20	80 x 160 x 144		160 x 144
