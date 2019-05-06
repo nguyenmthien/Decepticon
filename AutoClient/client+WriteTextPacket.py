@@ -126,6 +126,7 @@ def length(v):
 def angle(v1, v2):
    return math.acos(dotproduct(v1, v2) / (length(v1) * length(v2)))
 
+# shifting the origin from top left to bot left 
 def newCoord(xorg, yorg):
     x = xorg
     y = -yorg +300
