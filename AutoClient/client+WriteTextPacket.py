@@ -116,7 +116,7 @@ ws = websocket.create_connection(url,
 v2 = np.array([1,0])
 
 #Hàm tìm góc giữa trục x và vecto (từ điểm đến [0,0])
-#Angle is in degree
+#Angle is in rad
 def dotproduct(v1, v2):
   return sum((a*b) for a, b in zip(v1, v2))
 
@@ -124,10 +124,10 @@ def length(v):
   return math.sqrt(dotproduct(v, v))
 
 def angle(v1, v2):
-   return (math.acos(dotproduct(v1, v2) / (length(v1) * length(v2))))*180/(math.pi)
+   return math.acos(dotproduct(v1, v2) / (length(v1) * length(v2)))
 
 def newCoord(xorg, yorg):
-    x = xorg -150
+    x = xorg
     y = -yorg +300
     return x, y
 
@@ -165,11 +165,11 @@ while True:
 
     #File.truncate(0) #add this to delete all content in text file
 
-    for n in range (0,28):
+    for n in range (0,28):          #position update with newCoord
         packet['data'][n].update({'position': newCoord(packet['data'][n]['position'][0], packet['data'][n]['position'][1])})
 
     for g in range (0, 28):
-        packet['data'][g].update({'angle' : angle(packet['data'][g]["position"], v2)})
+        packet['data'][g].update({'angle' : angle(packet['data'][g]["dimension"], v2)})  #angle rad update
         # nested dictionary
     
     #input to text file
@@ -180,7 +180,7 @@ while True:
     print(packet)
     
     time.sleep(1)
-    ws.send(json.dumps({'finished': True}).encode('utf-8'))
+    #ws.send(json.dumps({'finished': True}).encode('utf-8'))
 
     
 
