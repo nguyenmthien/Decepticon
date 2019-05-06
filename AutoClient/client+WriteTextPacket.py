@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Góc được tính theo độ so với trục Ox
+
 ## Khai báo các thư viện được sử dụng
 import websocket
 import json
@@ -122,18 +124,16 @@ def length(v):
   return math.sqrt(dotproduct(v, v))
 
 def angle(v1, v2):
-  return math.acos(dotproduct(v1, v2) / (length(v1) * length(v2)))
+   return (math.acos(dotproduct(v1, v2) / (length(v1) * length(v2))))*180/(math.pi)
 
+def newCoord(xorg, yorg):
+    x = xorg -150
+    y = -yorg +300
+    return x, y
 
 while True:
     msg = ws.recv()
     packet = json.loads(msg.decode('utf-8'))
-
-    for i in range (0, 28):
-        #print (packet['data'][i]["position"])
-        #print (angle(packet['data'][i]["position"], v2))
-        packet['data'][i].update({'angle' : angle(packet['data'][i]["position"], v2)})
-        # nested dictionary
 
     # Hình hộp
     for j in range (4, 11):
@@ -160,13 +160,20 @@ while True:
         packet['data'][l].update({'point' : 30})
 
     # Bom
-    for n in range (24, 25):
-        packet['data'][n].update({'point' : -20})
+    for i in range (24, 25):
+        packet['data'][i].update({'point' : -20})
 
     #File.truncate(0) #add this to delete all content in text file
 
+    for n in range (0,28):
+        packet['data'][n].update({'position': newCoord(packet['data'][n]['position'][0], packet['data'][n]['position'][1])})
+
+    for g in range (0, 28):
+        packet['data'][g].update({'angle' : angle(packet['data'][g]["position"], v2)})
+        # nested dictionary
+    
     #input to text file
-    File = open("coordinate.txt", "w+")
+    File = open("coordinate.txt", "a+")
     string = str(packet)
     File.writelines(string+ '\n')
 
