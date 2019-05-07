@@ -12,6 +12,6 @@ LEFT     992      Left up right down
 RIGHT    991      Right up left down
 
 LB       990      Speed up 
-LT       989      
+LT       989      Increase speed
 RB       988      Speed down
-RT       987
+RT       987      Decrease speed

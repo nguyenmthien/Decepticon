@@ -60,3 +60,19 @@ void speedDown()
 		speedCount--;
 	}
 }
+
+void increaseSpeed()
+{
+    if (speedIndex < 2)
+    {
+        speedIndex++;
+    }
+}
+
+void decreaseSpeed()
+{
+    if (speedIndex > 0)
+    {
+        speedIndex--;
+    }
+}

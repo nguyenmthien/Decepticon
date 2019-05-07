@@ -33,6 +33,7 @@ double previousIl, previousIr;
 double previousEl, previousEr;
 
 int speedCount = 0;
+int speedIndex = 0;
 
 int input;
 
@@ -45,6 +46,8 @@ bool leftMotorIN1Bool = 0, leftMotorIN2Bool = 0,
 double k1[3] = {50, 100, 150};
 double k2[3] = {50, 100, 150};
 double Kp = 20.0, Ki = 0.0, Kd = 0.0;
+
+double kPV[3] = {20000.0, 30000.0, 40000.0};
 
 
 //IMPORT MODULES
