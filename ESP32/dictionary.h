@@ -47,7 +47,7 @@ void leftDownRightUp()
 
 void speedUp()
 {
-    if (speedCount < 2)
+    if (speedCount < 3)
 	{
 		speedCount++;
 	}

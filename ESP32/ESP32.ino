@@ -13,6 +13,8 @@ IPAddress gw(192, 168, 1, 1);
 /* create a server and listen on port 23 */
 WiFiServer server(23);
 WiFiClient client;
+WiFiServer debugServer(32);
+WiFiClient debugClient;
 
 
 
@@ -43,11 +45,11 @@ bool leftMotorIN1Bool = 0, leftMotorIN2Bool = 0,
      rightMotorIN1Bool = 0, rightMotorIN2Bool = 0;
 
 //ERROR FUNCTION & PID VARIABLES
-double k1[3] = {50, 100, 150};
-double k2[3] = {50, 100, 150};
+double k1[4] = {50, 30, 25, 20};
+double k2[4] = {50, 30, 25, 20};
 double Kp = 20.0, Ki = 0.0, Kd = 0.0;
 
-double kPV[3] = {20000.0, 30000.0, 40000.0};
+double kPV[3] = {20000.0, 10000.0, 4000.0};
 
 
 //IMPORT MODULES
@@ -60,9 +62,6 @@ double kPV[3] = {20000.0, 30000.0, 40000.0};
 
 void setup()
 {
-  //Serial.begin(9600);
-  //Serial.print("Connecting to ");
-  //Serial.println(ssid);
   /* connecting to WiFi */
   WiFi.config(ip, gw, subnet);
   WiFi.begin(ssid, password);
@@ -71,13 +70,10 @@ void setup()
   while (WiFi.status() != WL_CONNECTED) 
   {
       delay(500);
-      //Serial.print(".");
   }
-  //Serial.println("");
-  //Serial.println("WiFi connected with IP address: ");
-  //Serial.println(WiFi.localIP());
   /* start Server */
   server.begin();
+  debugServer.begin();
     
 	L298NSetup();
 	
@@ -90,7 +86,13 @@ void loop()
     client = server.available(); 
     if (client) 
     {                   
-      client.println("Welcome");         
+      client.println("Welcome");
+      debugClient = debugServer.available();
+      while(!debugClient)
+      {
+        debugClient = debugServer.available();
+      }
+      debugClient.println("Welcome");
       /* check client is connected */           
       while (client.connected()) 
       {          
@@ -110,6 +112,7 @@ void loop()
     
               L298NMotorDriver();
       }
+      debug = true;
       emergencyStop();
       L298NMotorDriver();
     }

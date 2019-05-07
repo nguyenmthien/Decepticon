@@ -63,9 +63,25 @@ void interprete()
 		}
 		case 989:
 		{
+			increaseSpeed();
+			debug = true;
+			client.println("increaseSpeed");
+      resetPID();
+			break;
+		}
+		case 988:
+		{
 			speedDown();
 			debug = false;
 			client.println("speedDown");
+      resetPID();
+			break;
+		}
+		case 987:
+		{
+			decreaseSpeed();
+			debug = true;
+			client.println("decreaseSpeed");
       resetPID();
 			break;
 		}
