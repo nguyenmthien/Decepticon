@@ -19,6 +19,7 @@ import net.java.games.input.*;
 
 ControlIO control;
 ControlDevice stick;
+
 double px, py, tan, phi,intPhi;
 int i;
 String outputPhi;
