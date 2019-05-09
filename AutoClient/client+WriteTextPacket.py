@@ -11,11 +11,21 @@ import time
 import urllib.request
 import math
 import numpy as np
+
+from vertex import vertex
+from vertex import rotate
+from vertex import vertexNonBalance
+
+from calculatePacket import dotproduct
+from calculatePacket import length
+from calculatePacket import angle
+from calculatePacket import newCoord
+
 from collections import defaultdict
 
 from pathlib import Path
 
-
+####################################################################### I didn't write this
 ## Cài đặt và trả về thông tin cho giao thức mã hoá HTTPS
 def makeSSLContext(ca, crt, key):
     sslCTX = ssl.create_default_context(
@@ -112,28 +122,47 @@ ws = websocket.create_connection(url,
                                  header=header,
                                  sslopt=sslopt)
 
+###################################################################### I didn't write this
+
 # x axis
 v2 = np.array([1,0])
 
-#Hàm tìm góc giữa trục x và vecto (từ điểm đến [0,0])
-#Angle is in rad
-def dotproduct(v1, v2):
-  return sum((a*b) for a, b in zip(v1, v2))
+# Create a new dictionary that stores vertices of objects
+vertices = dict();
+vertices['manual_ally'] = {}
+vertices['auto_ally'] = {}
+vertices['manual_enemy'] = {}
+vertices['auto_enemy'] = {}
+vertices['cube1'] = {}
+vertices['cube2'] = {}
+vertices['cube3'] = {}
+vertices['cube4'] = {}
+vertices['cube5'] = {}
+vertices['cube6'] = {}
+vertices['cube7'] = {}
+vertices['flat1'] = {}
+vertices['flat2'] = {}
+vertices['flat3'] = {}                      #case1 the origin is in bot left 
+vertices['flat4'] = {}
+vertices['disk1'] = {}
+vertices['disk2'] = {}
+vertices['disk3'] = {}
+vertices['paper1'] = {}
+vertices['paper2'] = {}
+vertices['table1'] = {}
+vertices['table2'] = {}
+vertices['shuriken1'] = {}
+vertices['shuriken2'] = {}
+vertices['bomb'] = {}
+vertices['ourGoal'] = {'vertex1': (135, 25)}   
+vertices['theirGoal'] = {'vertex1': (175,275)}
+vertices['ArenaVertices'] = {'vertex1': (25,275), 'vertex2': (275,275), 'vertex3': (275,25), 'vertex4': (25,25)}
+vertices['ourWall'] = {'vertex1' : (110,0), 'vertex2': (110,25)}  #vertex1 is the bottom of the wall
+vertices['theirWall'] = {'vertex1': (190, 300), 'vertex2': (190, 275)} #vertex2 is the top point of the wall
 
-def length(v):
-  return math.sqrt(dotproduct(v, v))
-
-def angle(v1, v2):
-   return math.acos(dotproduct(v1, v2) / (length(v1) * length(v2)))
-
-# shifting the origin from top left to bot left 
-def newCoord(xorg, yorg):
-    x = xorg
-    y = -yorg +300
-    return x, y
-
-while True:
+def getPacket():
     msg = ws.recv()
+    global packet
     packet = json.loads(msg.decode('utf-8'))
 
     # Hình hộp
@@ -164,24 +193,54 @@ while True:
     for i in range (24, 25):
         packet['data'][i].update({'point' : -20})
 
-    #File.truncate(0) #add this to delete all content in text file
-
     for n in range (0,28):          #position update with newCoord
         packet['data'][n].update({'position': newCoord(packet['data'][n]['position'][0], packet['data'][n]['position'][1])})
 
     for g in range (0, 28):
         packet['data'][g].update({'angle' : angle(packet['data'][g]["dimension"], v2)})  #angle rad update
         # nested dictionary
-    
-    #input to text file
-    File = open("coordinate.txt", "a+")
-    string = str(packet)
-    File.writelines(string+ '\n')
+        
+    vertices.update({'manual_ally': vertex(packet['data'][0]['position'][0],packet['data'][0]['position'][1], 20, packet['data'][0]['angle'])})
+    vertices.update({'auto_ally': vertex(packet['data'][1]['position'][0],packet['data'][1]['position'][1], 20, packet['data'][1]['angle'])})
+    vertices.update({'manual_enemy': (packet['data'][2]['position'][0],packet['data'][2]['position'][1], 20, packet['data'][2]['angle'])})
+    vertices.update({'auto_enemy': vertex(packet['data'][3]['position'][0],packet['data'][3]['position'][1], 20, packet['data'][3]['angle'])})
 
-    print(packet)
+    vertices.update({'cube1': vertex(packet['data'][4]['position'][0],packet['data'][4]['position'][1], 8, packet['data'][4]['angle'])})
+    vertices.update({'cube2': vertex(packet['data'][5]['position'][0],packet['data'][5]['position'][1], 8, packet['data'][5]['angle'])})
+    vertices.update({'cube3': vertex(packet['data'][6]['position'][0],packet['data'][6]['position'][1], 8, packet['data'][6]['angle'])})
+    vertices.update({'cube4': vertex(packet['data'][7]['position'][0],packet['data'][7]['position'][1], 8, packet['data'][7]['angle'])})
+    vertices.update({'cube5': vertex(packet['data'][8]['position'][0],packet['data'][8]['position'][1], 8, packet['data'][8]['angle'])})
+    vertices.update({'cube6': vertex(packet['data'][9]['position'][0],packet['data'][9]['position'][1], 8, packet['data'][9]['angle'])})
+    vertices.update({'cube7': vertex(packet['data'][10]['position'][0],packet['data'][10]['position'][1], 8, packet['data'][10]['angle'])})
+
+    vertices.update({'flat1': vertexNonBalance(packet['data'][11]['position'][0],packet['data'][11]['position'][1], 14, 8, packet['data'][11]['angle'])})
+    vertices.update({'flat2': vertexNonBalance(packet['data'][12]['position'][0],packet['data'][12]['position'][1], 14, 8, packet['data'][12]['angle'])})
+    vertices.update({'flat3': vertexNonBalance(packet['data'][13]['position'][0],packet['data'][13]['position'][1], 14, 8, packet['data'][13]['angle'])})
+    vertices.update({'flat4': vertexNonBalance(packet['data'][14]['position'][0],packet['data'][14]['position'][1], 14, 8, packet['data'][14]['angle'])})
+
+    vertices.update({'disk1': vertex(packet['data'][15]['position'][0],packet['data'][15]['position'][1], 15 ,packet['data'][15]['angle'])})
+    vertices.update({'disk2': vertex(packet['data'][16]['position'][0],packet['data'][16]['position'][1], 15 ,packet['data'][16]['angle'])})
+    vertices.update({'disk3': vertex(packet['data'][17]['position'][0],packet['data'][17]['position'][1], 15 ,packet['data'][17]['angle'])})
+
+    vertices.update({'paper1': vertexNonBalance(packet['data'][18]['position'][0],packet['data'][18]['position'][1], 20, 15, packet['data'][18]['angle'])})
+    vertices.update({'paper2': vertexNonBalance(packet['data'][19]['position'][0],packet['data'][19]['position'][1], 20, 15, packet['data'][19]['angle'])})
+
+    vertices.update({'table1': vertexNonBalance(packet['data'][20]['position'][0],packet['data'][20]['position'][1], 20, 10, packet['data'][20]['angle'])})
+    vertices.update({'table2': vertexNonBalance(packet['data'][21]['position'][0],packet['data'][21]['position'][1], 20, 10, packet['data'][21]['angle'])})
+
+    vertices.update({'shuriken1': vertex(packet['data'][22]['position'][0],packet['data'][22]['position'][1], 12.8, packet['data'][22]['angle'])})
+    vertices.update({'shuriken2': vertex(packet['data'][23]['position'][0],packet['data'][23]['position'][1], 12.8, packet['data'][23]['angle'])})
+
+    vertices.update({'bomb': vertexNonBalance(packet['data'][24]['position'][0],packet['data'][24]['position'][1], 16, 14.4, packet['data'][24]['angle'])}) 
+    #print(vertices['manual_ally']['vertex0'][0])
+    #print(vertices)
     
     time.sleep(1)
     #ws.send(json.dumps({'finished': True}).encode('utf-8'))
 
-    
-
+if __name__ == "__main__":
+    while True:
+        getPacket()
+        print(packet)
+        print(vertices)
+        
