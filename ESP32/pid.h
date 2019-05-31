@@ -59,7 +59,7 @@ void PID()
     Er = SPr - PVr;
 
     
-    debugClient.print(Ul); debugClient.print(" "); debugClient.println(Ur);
+    //debugClient.print(Ul); debugClient.print(" "); debugClient.println(Ur);
     
     
     //PID formulas:

@@ -29,6 +29,8 @@ def get_path(s1, s2):
             return 30041975
         x1, y1 = vertices[n1[0]][n1[1]]
         x2, y2 = vertices[n2[0]][n2[1]]
+        if (x1 < 0 or x2 < 0):
+            return 30041975
         for objects in vertices:
             if (objects == 'ourWall' or objects == 'theirWall'):
                 vertex1 = vertices[objects]['vertex1']
@@ -68,4 +70,3 @@ if __name__ == '__main__':
 
     for v in path:
         print(v)
-

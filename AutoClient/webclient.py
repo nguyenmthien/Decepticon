@@ -160,11 +160,12 @@ vertices['ArenaVertices'] = {'vertex1': (25,275), 'vertex2': (275,275), 'vertex3
 vertices['ourWall'] = {'vertex1' : (110,0), 'vertex2': (110,25)}  #vertex1 is the bottom of the wall
 vertices['theirWall'] = {'vertex1': (190, 300), 'vertex2': (190, 275)} #vertex2 is the top point of the wall
 
-def getPacket():
+def getPacket(yourTeam):
     msg = ws.recv()
     global packet
     packet = json.loads(msg.decode('utf-8'))
 
+    print(packet)
     # Hình hộp
     for j in range (4, 11):
         packet['data'][j].update({'point' : 5})
@@ -193,16 +194,19 @@ def getPacket():
     for i in range (24, 25):
         packet['data'][i].update({'point' : -20})
 
-    for n in range (0,28):          #position update with newCoord
-        packet['data'][n].update({'position': newCoord(packet['data'][n]['position'][0], packet['data'][n]['position'][1])})
-
+    for n in range (0,28):
+        if (packet['data'][n]['position'][0] > 0) & (packet['data'][n]['position'][1] > 0) & (yourTeam == '1') :
+            packet['data'][n].update({'position': newCoord(packet['data'][n]['position'][0], packet['data'][n]['position'][1])})
+        else:
+            break
+        
     for g in range (0, 28):
         packet['data'][g].update({'angle' : angle(packet['data'][g]["dimension"], v2)})  #angle rad update
         # nested dictionary
         
     vertices.update({'manual_ally': vertex(packet['data'][0]['position'][0],packet['data'][0]['position'][1], 20, packet['data'][0]['angle'])})
     vertices.update({'auto_ally': vertex(packet['data'][1]['position'][0],packet['data'][1]['position'][1], 20, packet['data'][1]['angle'])})
-    vertices.update({'manual_enemy': (packet['data'][2]['position'][0],packet['data'][2]['position'][1], 20, packet['data'][2]['angle'])})
+    vertices.update({'manual_enemy': vertex(packet['data'][2]['position'][0],packet['data'][2]['position'][1], 20, packet['data'][2]['angle'])})
     vertices.update({'auto_enemy': vertex(packet['data'][3]['position'][0],packet['data'][3]['position'][1], 20, packet['data'][3]['angle'])})
 
     vertices.update({'cube1': vertex(packet['data'][4]['position'][0],packet['data'][4]['position'][1], 8, packet['data'][4]['angle'])})
@@ -231,7 +235,16 @@ def getPacket():
     vertices.update({'shuriken1': vertex(packet['data'][22]['position'][0],packet['data'][22]['position'][1], 12.8, packet['data'][22]['angle'])})
     vertices.update({'shuriken2': vertex(packet['data'][23]['position'][0],packet['data'][23]['position'][1], 12.8, packet['data'][23]['angle'])})
 
-    vertices.update({'bomb': vertexNonBalance(packet['data'][24]['position'][0],packet['data'][24]['position'][1], 16, 14.4, packet['data'][24]['angle'])}) 
+    vertices.update({'bomb': vertexNonBalance(packet['data'][24]['position'][0],packet['data'][24]['position'][1], 16, 14.4, packet['data'][24]['angle'])})
+    '''
+    for x in vertices.keys():
+        #print( x, ': ', vertices[x])
+        for i in vertices[x].keys():
+            #print(i, ": ", vertices[x][i])
+            if vertices[x][i][0] < 0 && vertices[x][i][1] > 0:
+    '''
+    
+    
     #print(vertices['manual_ally']['vertex0'][0])
     #print(vertices)
     
@@ -239,8 +252,11 @@ def getPacket():
     #ws.send(json.dumps({'finished': True}).encode('utf-8'))
 
 if __name__ == "__main__":
+    Team = input("enter your team: ")
+    #print(type(Team))
     while True:
-        getPacket()
+        getPacket(Team)
         print(packet)
         print(vertices)
+        #print(vertices.keys())  #accessing vertices' keys
         

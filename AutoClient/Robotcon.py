@@ -1,15 +1,21 @@
-     def bubbleSort(array, indexArray_b, objectSocreRanking_b):
-	 
+def bubbleSort(array, indexArray_b, objectSocreRanking_b):
+    for count in range(len(array)):
+        for count_1 in range(len(array) - count - 1):
+            if (array[count + count_1 + 1] < array[count]):
+				#Sắp xếp theo khoảng cách
+                temporary = array[count]
+                array[count] = array[count + count_1 + 1]
+                array[count + count_1 + 1] = temporary	 
 				
 				#Cập nhập điểm
-				temporary = objectSocreRanking_b[count]
-				objectSocreRanking_b[count] = objectSocreRanking_b[count + count_1 + 1]
-				objectSocreRanking_b[count + count_1 + 1] = temporary
+                temporary = objectSocreRanking_b[count]
+                objectSocreRanking_b[count] = objectSocreRanking_b[count + count_1 + 1]
+                objectSocreRanking_b[count + count_1 + 1] = temporary
 				
 				#Cập nhập index
-				temporary = indexArray_b[count]
-				indexArray_b[count] = indexArray_b[count + count_1 + 1]
-				indexArray_b[count + count_1 + 1] = temporary
+                temporary = indexArray_b[count]
+                indexArray_b[count] = indexArray_b[count + count_1 + 1]
+                indexArray_b[count + count_1 + 1] = temporary
 
 """
 	Biến priority thể hiện sự ưu tiên trong chọn vật:

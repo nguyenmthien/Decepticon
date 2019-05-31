@@ -5,6 +5,8 @@ Last edited 20130402
 
 
 #include <WiFi.h>
+#include <esp_wifi.h>
+
 const char* ssid     = "nguyenmthien";
 const char* password = "299792458";
 IPAddress ip(192, 168, 137, 128); 
@@ -13,8 +15,8 @@ IPAddress gw(192, 168, 1, 1);
 /* create a server and listen on port 23 */
 WiFiServer server(23);
 WiFiClient client;
-WiFiServer debugServer(32);
-WiFiClient debugClient;
+//WiFiServer debugServer(32);
+//WiFiClient debugClient;
 
 
 
@@ -62,6 +64,8 @@ double kPV[3] = {20000.0, 10000.0, 4000.0};
 
 void setup()
 {
+  WiFi.mode(WIFI_STA);
+  esp_wifi_set_ps (WIFI_PS_NONE);
   /* connecting to WiFi */
   WiFi.config(ip, gw, subnet);
   WiFi.begin(ssid, password);
@@ -73,7 +77,7 @@ void setup()
   }
   /* start Server */
   server.begin();
-  debugServer.begin();
+  //debugServer.begin();
     
 	L298NSetup();
 	
@@ -87,12 +91,16 @@ void loop()
     if (client) 
     {                   
       client.println("Welcome");
-      debugClient = debugServer.available();
-      while(!debugClient)
-      {
-        debugClient = debugServer.available();
-      }
-      debugClient.println("Welcome");
+
+
+      //debugClient = debugServer.available();
+      //while(!debugClient)
+      //{
+      //  debugClient = debugServer.available();
+      //}
+      //debugClient.println("Welcome");
+
+
       /* check client is connected */           
       while (client.connected()) 
       {          
